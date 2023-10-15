@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://0ct7qo0h215b"]
+
+[ext_resource type="Script" path="res://Scene/Components/TurnBasedEntity/turn_based_entity.gd" id="1_iuko8"]
+
+[node name="TurnBasedEntity" type="Node"]
+script = ExtResource("1_iuko8")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://oy7n40i13nlq"]
+
+[ext_resource type="Script" path="res://Scene/Entities/MobSpawner/mob_spawner.gd" id="1_vt44f"]
+
+[node name="MobSpawner" type="Node"]
+script = ExtResource("1_vt44f")

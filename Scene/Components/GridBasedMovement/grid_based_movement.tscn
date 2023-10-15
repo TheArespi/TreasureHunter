@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8nolpe8tjujg"]
+
+[ext_resource type="Script" path="res://Scene/Components/GridBasedMovement/grid_based_movement.gd" id="1_t5tyn"]
+
+[node name="GridBasedMovement" type="Node"]
+script = ExtResource("1_t5tyn")

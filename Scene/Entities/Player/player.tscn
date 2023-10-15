@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://2tdu77n7rksx"]
+
+[ext_resource type="Script" path="res://Scene/Entities/Player/player.gd" id="1_dpy80"]
+[ext_resource type="Texture2D" uid="uid://b1b4s25ko2566" path="res://Sprites/DungeonEntities.png" id="1_tebma"]
+[ext_resource type="PackedScene" uid="uid://utrb6m7iolot" path="res://Scene/Components/EntityInformation/entity_information.tscn" id="2_lkv3s"]
+[ext_resource type="PackedScene" uid="uid://b8nolpe8tjujg" path="res://Scene/Components/GridBasedMovement/grid_based_movement.tscn" id="2_t5d26"]
+[ext_resource type="PackedScene" uid="uid://0ct7qo0h215b" path="res://Scene/Components/TurnBasedEntity/turn_based_entity.tscn" id="5_sacmw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71e5l"]
+size = Vector2(12, 14)
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_dpy80")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="NorthCast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -16)
+collide_with_areas = true
+
+[node name="EastCast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(16, 0)
+collide_with_areas = true
+
+[node name="WestCast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-16, 0)
+collide_with_areas = true
+
+[node name="SouthCast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 16)
+collide_with_areas = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_tebma")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_71e5l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="EntityInformation" parent="." instance=ExtResource("2_lkv3s")]
+entity_name = "Player"
+
+[node name="GridBasedMovement" parent="." node_paths=PackedStringArray("north_raycast", "east_raycast", "west_raycast", "south_raycast", "sprite_2d") instance=ExtResource("2_t5d26")]
+north_raycast = NodePath("../Raycasts/NorthCast")
+east_raycast = NodePath("../Raycasts/EastCast")
+west_raycast = NodePath("../Raycasts/WestCast")
+south_raycast = NodePath("../Raycasts/SouthCast")
+sprite_2d = NodePath("../Sprite2D")
+
+[node name="TurnBasedEntity" parent="." instance=ExtResource("5_sacmw")]
+
+[connection signal="stopped_moving" from="GridBasedMovement" to="." method="_on_grid_based_movement_stopped_moving"]
