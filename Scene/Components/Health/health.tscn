@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqddavgwxy6te"]
+
+[ext_resource type="Script" path="res://Scene/Components/Health/health.gd" id="1_dmsd1"]
+
+[node name="Health" type="Node2D"]
+script = ExtResource("1_dmsd1")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -4.0
+offset_right = 9.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 1.0
+value = 100.0
+show_percentage = false

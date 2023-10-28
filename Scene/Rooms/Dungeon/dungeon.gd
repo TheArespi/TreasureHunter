@@ -9,6 +9,7 @@ var entity_information_class = preload("res://Scene/Components/EntityInformation
 func _ready():
 	turn_queue.insert(0, $Player.get_node("EntityInformation").entity_name)
 	GlobalStuff.end_turn.connect(current_turn_stop)
+	GlobalStuff.death.connect(death)
 	next_turn()
 	
 func _process(_delta):
@@ -29,3 +30,9 @@ func current_turn_stop(name: String):
 func _on_mob_spawner_mob_spawning_done():
 	for mob in $MobSpawner.get_children():
 		turn_queue.append(mob.get_node("EntityInformation").entity_name)
+		
+func death(name: String):
+	turn_queue.erase(name)
+	
+	if current_turn == name:
+		next_turn()

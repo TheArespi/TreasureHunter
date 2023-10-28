@@ -31,9 +31,13 @@ func _process(_delta):
 	if !moving:
 		if get_owner().position.distance_to(target_position) > minimum_distance:
 			if facing_raycast.is_colliding():
+				if facing_raycast.get_collider().get_node("Interactable") != null:
+					var interactor = get_owner().get_node("EntityInformation").entity_name
+					var interacted = facing_raycast.get_collider().get_node("EntityInformation").entity_name
+					GlobalStuff.interaction.emit(interactor, interacted)
+					
 				target_position = get_owner().position
 				stopped_moving.emit()
-				#if there is an interactable, interact
 			else:
 				moving = true
 				started_moving.emit()
@@ -62,8 +66,57 @@ func move(dir: String):
 			target_position.y += tile_size
 			facing_raycast = south_raycast
 
-# will return an array of interactable or null [ NORTH, EAST, SOUTH, WEST ]
+# will return an array of entity name or "" [ NORTH, EAST, SOUTH, WEST ]
 func check_interactable():
-	var north_interactable = null
-	#TODO: make interactable component
+	var north_interactable = ""
+	var raycast_colliding = north_raycast.is_colliding()
+	var collider_has_interactable = north_raycast.get_collider().get_node("Interactable") != null
+	if raycast_colliding && collider_has_interactable:
+		north_interactable = north_raycast.get_collider().get_node("EntityInformation").entity_name
+		
+	var east_interactable = ""
+	raycast_colliding = east_raycast.is_colliding()
+	collider_has_interactable = east_raycast.get_collider().get_node("Interactable") != null
+	if raycast_colliding && collider_has_interactable:
+		east_interactable = east_raycast.get_collider().get_node("EntityInformation").entity_name
+		
+	var south_interactable = ""
+	raycast_colliding = south_raycast.is_colliding()
+	collider_has_interactable = south_raycast.get_collider().get_node("Interactable") != null
+	if raycast_colliding && collider_has_interactable:
+		south_interactable = south_raycast.get_collider().get_node("EntityInformation").entity_name
+		
+	var west_interactable = ""
+	raycast_colliding = west_raycast.is_colliding()
+	collider_has_interactable = west_raycast.get_collider().get_node("Interactable") != null
+	if raycast_colliding && collider_has_interactable:
+		west_interactable = west_raycast.get_collider().get_node("EntityInformation").entity_name
+		
+	return [north_interactable, east_interactable, south_interactable, west_interactable]
 	
+func can_interact(direction: String):
+	var raycast_colliding: bool
+	var collider_has_interactable: bool
+	
+	if direction == "north":
+		raycast_colliding = north_raycast.is_colliding()
+		collider_has_interactable = north_raycast.get_collider().get_node("Interactable") != null
+		if raycast_colliding && collider_has_interactable:
+			return true
+	elif direction == "east":
+		raycast_colliding = east_raycast.is_colliding()
+		collider_has_interactable = east_raycast.get_collider().get_node("Interactable") != null
+		if raycast_colliding && collider_has_interactable:
+			return true
+	elif direction == "south":
+		raycast_colliding = south_raycast.is_colliding()
+		collider_has_interactable = south_raycast.get_collider().get_node("Interactable") != null
+		if raycast_colliding && collider_has_interactable:
+			return true
+	elif direction == "west":
+		raycast_colliding = west_raycast.is_colliding()
+		collider_has_interactable = west_raycast.get_collider().get_node("Interactable") != null
+		if raycast_colliding && collider_has_interactable:
+			return true
+	
+	return false

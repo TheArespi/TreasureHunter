@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdp7mv8y3sa1v"]
+
+[ext_resource type="Script" path="res://Scene/Components/Interactable/InteractableBehaviour/AcquirableInteraction/acquirable_interaction.gd" id="1_sgqfv"]
+
+[node name="AcquirableInteraction" type="Node"]
+script = ExtResource("1_sgqfv")

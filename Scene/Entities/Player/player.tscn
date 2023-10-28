@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://2tdu77n7rksx"]
+[gd_scene load_steps=11 format=3 uid="uid://2tdu77n7rksx"]
 
 [ext_resource type="Script" path="res://Scene/Entities/Player/player.gd" id="1_dpy80"]
 [ext_resource type="Texture2D" uid="uid://b1b4s25ko2566" path="res://Sprites/DungeonEntities.png" id="1_tebma"]
 [ext_resource type="PackedScene" uid="uid://utrb6m7iolot" path="res://Scene/Components/EntityInformation/entity_information.tscn" id="2_lkv3s"]
 [ext_resource type="PackedScene" uid="uid://b8nolpe8tjujg" path="res://Scene/Components/GridBasedMovement/grid_based_movement.tscn" id="2_t5d26"]
 [ext_resource type="PackedScene" uid="uid://0ct7qo0h215b" path="res://Scene/Components/TurnBasedEntity/turn_based_entity.tscn" id="5_sacmw"]
+[ext_resource type="PackedScene" uid="uid://b6pdska54fyc5" path="res://Scene/Components/Interactable/interactable.tscn" id="6_qpmgy"]
+[ext_resource type="PackedScene" uid="uid://bfyu6db0t413n" path="res://Scene/Components/Interactable/InteractableBehaviour/DamageableInteraction/damageable_interaction.tscn" id="7_rg3cp"]
+[ext_resource type="PackedScene" uid="uid://cqddavgwxy6te" path="res://Scene/Components/Health/health.tscn" id="7_vk0bv"]
+[ext_resource type="PackedScene" uid="uid://qsijus5u6tt3" path="res://Scene/Components/CombatInformation/combat_information.tscn" id="9_tao1x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71e5l"]
 size = Vector2(12, 14)
@@ -52,5 +56,16 @@ south_raycast = NodePath("../Raycasts/SouthCast")
 sprite_2d = NodePath("../Sprite2D")
 
 [node name="TurnBasedEntity" parent="." instance=ExtResource("5_sacmw")]
+
+[node name="Interactable" parent="." instance=ExtResource("6_qpmgy")]
+
+[node name="DamageableInteraction" parent="Interactable" node_paths=PackedStringArray("health", "combat_information") instance=ExtResource("7_rg3cp")]
+health = NodePath("../../Health")
+combat_information = NodePath("../../CombatInformation")
+
+[node name="Health" parent="." instance=ExtResource("7_vk0bv")]
+position = Vector2(0, -8)
+
+[node name="CombatInformation" parent="." instance=ExtResource("9_tao1x")]
 
 [connection signal="stopped_moving" from="GridBasedMovement" to="." method="_on_grid_based_movement_stopped_moving"]

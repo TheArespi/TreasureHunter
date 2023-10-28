@@ -7,7 +7,6 @@ func _ready():
 	GlobalStuff.end_turn.connect(entity_turn_end)
 	
 func entity_turn_start(entity: String):
-	print("turn start")
 	if entity == get_owner().get_node("EntityInformation").entity_name: 
 		current_turn = true
 		print(get_owner().get_node("EntityInformation").entity_name, " is starting")

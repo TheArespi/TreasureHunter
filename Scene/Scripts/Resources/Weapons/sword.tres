@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bu3q67y1gg28d"]
+
+[ext_resource type="Script" path="res://Scene/Scripts/weapon.gd" id="1_s3sks"]
+
+[resource]
+script = ExtResource("1_s3sks")
+title = "Sword"
+base_damage = 25

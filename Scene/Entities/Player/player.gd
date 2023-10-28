@@ -10,6 +10,9 @@ func _ready():
 	$Camera2D.limit_right = map_limit.end.x * map_cellsize.x
 	$Camera2D.limit_top = map_limit.position.y * map_cellsize.y
 	$Camera2D.limit_bottom = map_limit.end.y * map_cellsize.y
+	
+	GlobalStuff.equip.connect(equip)
+	GlobalStuff.addEntity($EntityInformation.entity_name, self)
 
 func _process(_delta):
 	if !$TurnBasedEntity.current_turn:
@@ -28,3 +31,6 @@ func _process(_delta):
 func _on_grid_based_movement_stopped_moving():
 	GlobalStuff.update_player_position.emit(position)
 	GlobalStuff.end_turn.emit($EntityInformation.entity_name)
+	
+func equip(equipper: String, weapon: Weapon):
+	$CombatInformation.weapon = weapon
