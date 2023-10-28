@@ -32,5 +32,5 @@ func _on_grid_based_movement_stopped_moving():
 	GlobalStuff.update_player_position.emit(position)
 	GlobalStuff.end_turn.emit($EntityInformation.entity_name)
 	
-func equip(equipper: String, weapon: Weapon):
+func equip(_equipper: String, weapon: Weapon):
 	$CombatInformation.weapon = weapon

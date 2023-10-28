@@ -39,5 +39,5 @@ func _ready():
 		
 	mob_spawning_done.emit()
 	
-func get_random_int(min: int, max: int):
-	return randi() % (min - max)
+func get_random_int(min_val: int, max_val: int):
+	return randi() % (min_val - max_val)
