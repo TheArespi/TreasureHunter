@@ -12,7 +12,7 @@ func _ready():
 	$Camera2D.limit_bottom = map_limit.end.y * map_cellsize.y
 	
 	GlobalStuff.equip.connect(equip)
-	GlobalStuff.addEntity($EntityInformation.entity_name, self)
+	GlobalStuff.add_entity($EntityInformation.entity_name, self)
 
 func _process(_delta):
 	if !$TurnBasedEntity.current_turn:
@@ -34,3 +34,4 @@ func _on_grid_based_movement_stopped_moving():
 	
 func equip(_equipper: String, weapon: Weapon):
 	$CombatInformation.weapon = weapon
+	print("Player found the treasure")

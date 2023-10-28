@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d322isvml3ao5"]
+[gd_scene load_steps=10 format=3 uid="uid://d322isvml3ao5"]
 
 [ext_resource type="PackedScene" uid="uid://2tdu77n7rksx" path="res://Scene/Entities/Player/player.tscn" id="1_4c2j2"]
 [ext_resource type="Script" path="res://Scene/Rooms/Dungeon/dungeon.gd" id="1_lo507"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://oy7n40i13nlq" path="res://Scene/Entities/MobSpawner/mob_spawner.tscn" id="4_s0pql"]
 [ext_resource type="PackedScene" uid="uid://0hh7g7ukk0k8" path="res://Scene/Entities/Slime/slime.tscn" id="5_dgy2s"]
 [ext_resource type="PackedScene" uid="uid://b1gdpcanrhfp1" path="res://Scene/Entities/Sword/sword.tscn" id="6_38x4r"]
+[ext_resource type="PackedScene" uid="uid://fhhwdxxrl7nk" path="res://Scene/Entities/Treasure/treasure.tscn" id="7_5c74l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f5wry"]
 texture = ExtResource("2_jaqm7")
@@ -104,5 +105,8 @@ mob_obj = ExtResource("5_dgy2s")
 
 [node name="Sword" parent="." instance=ExtResource("6_38x4r")]
 position = Vector2(182, 69)
+
+[node name="Treasure" parent="." instance=ExtResource("7_5c74l")]
+position = Vector2(134, 67)
 
 [connection signal="mob_spawning_done" from="MobSpawner" to="." method="_on_mob_spawner_mob_spawning_done"]

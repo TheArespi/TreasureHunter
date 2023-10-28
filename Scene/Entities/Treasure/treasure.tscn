@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://fhhwdxxrl7nk"]
+
+[ext_resource type="Script" path="res://Scene/Entities/Treasure/treasure.gd" id="1_jphtx"]
+[ext_resource type="Texture2D" uid="uid://b1b4s25ko2566" path="res://Sprites/DungeonEntities.png" id="2_q45s4"]
+[ext_resource type="PackedScene" uid="uid://utrb6m7iolot" path="res://Scene/Components/EntityInformation/entity_information.tscn" id="3_xh8vw"]
+[ext_resource type="PackedScene" uid="uid://b6pdska54fyc5" path="res://Scene/Components/Interactable/interactable.tscn" id="4_r3o28"]
+[ext_resource type="PackedScene" uid="uid://cdp7mv8y3sa1v" path="res://Scene/Components/Interactable/InteractableBehaviour/AcquirableInteraction/acquirable_interaction.tscn" id="5_n2mbk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a50vu"]
+size = Vector2(14, 12)
+
+[node name="Treasure" type="Area2D"]
+script = ExtResource("1_jphtx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_q45s4")
+region_enabled = true
+region_rect = Rect2(32, 16, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a50vu")
+
+[node name="EntityInformation" parent="." instance=ExtResource("3_xh8vw")]
+entity_name = "Treasure"
+
+[node name="Interactable" parent="." instance=ExtResource("4_r3o28")]
+
+[node name="AcquirableInteraction" parent="Interactable" instance=ExtResource("5_n2mbk")]
+
+[connection signal="acquired" from="Interactable/AcquirableInteraction" to="." method="_on_acquirable_interaction_acquired"]

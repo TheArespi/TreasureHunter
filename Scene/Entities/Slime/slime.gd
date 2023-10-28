@@ -5,7 +5,7 @@ var picked_where_to_move: bool = false
 
 func _ready():
 	GlobalStuff.update_player_position.connect(player_position_updated)
-	GlobalStuff.addEntity($EntityInformation.entity_name, self)
+	GlobalStuff.add_entity($EntityInformation.entity_name, self)
 
 func _process(_delta):
 	if $TurnBasedEntity.current_turn:
