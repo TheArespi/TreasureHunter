@@ -10,6 +10,7 @@ func interact(interactor: String, interacted: String):
 		health.damage(GlobalStuff.entities[interactor].get_node("CombatInformation").calculate_damage())
 		
 	var weapon_used = "fist"
-	if combat_information.weapon != null:
-		weapon_used = GlobalStuff.entities[interactor].get_node("CombatInformation").weapon.title
+	var interactor_weapon = GlobalStuff.entities[interactor].get_node("CombatInformation").weapon
+	if interactor_weapon != null:
+		weapon_used = interactor_weapon.title
 	print(interactor, " attacked ", interacted, " using ", weapon_used, " inflicting ", combat_information.calculate_damage(), " damage")

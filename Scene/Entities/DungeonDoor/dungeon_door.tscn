@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://doqcnkcdik1bj"]
+
+[ext_resource type="Texture2D" uid="uid://ddbx35b4sosp7" path="res://Sprites/DungeonDoor.png" id="1_dvhfg"]
+[ext_resource type="Script" path="res://Scene/Entities/DungeonDoor/dungeon_door.gd" id="1_udxin"]
+[ext_resource type="PackedScene" uid="uid://b6pdska54fyc5" path="res://Scene/Components/Interactable/interactable.tscn" id="3_rh0sc"]
+[ext_resource type="PackedScene" uid="uid://d18ndweqd2v70" path="res://Scene/Components/Interactable/InteractableBehaviour/DoorInteraction/door_interaction.tscn" id="4_tn6us"]
+[ext_resource type="PackedScene" uid="uid://utrb6m7iolot" path="res://Scene/Components/EntityInformation/entity_information.tscn" id="5_nea6o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mv3o"]
+size = Vector2(16, 32)
+
+[node name="DungeonDoor" type="Area2D"]
+script = ExtResource("1_udxin")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_dvhfg")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7mv3o")
+
+[node name="Interactable" parent="." instance=ExtResource("3_rh0sc")]
+
+[node name="DoorInteraction" parent="Interactable" instance=ExtResource("4_tn6us")]
+
+[node name="EntityInformation" parent="." instance=ExtResource("5_nea6o")]
+entity_name = "Door"

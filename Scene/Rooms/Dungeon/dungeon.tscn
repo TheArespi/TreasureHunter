@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d322isvml3ao5"]
+[gd_scene load_steps=11 format=3 uid="uid://d322isvml3ao5"]
 
 [ext_resource type="PackedScene" uid="uid://2tdu77n7rksx" path="res://Scene/Entities/Player/player.tscn" id="1_4c2j2"]
 [ext_resource type="Script" path="res://Scene/Rooms/Dungeon/dungeon.gd" id="1_lo507"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0hh7g7ukk0k8" path="res://Scene/Entities/Slime/slime.tscn" id="5_dgy2s"]
 [ext_resource type="PackedScene" uid="uid://b1gdpcanrhfp1" path="res://Scene/Entities/Sword/sword.tscn" id="6_38x4r"]
 [ext_resource type="PackedScene" uid="uid://fhhwdxxrl7nk" path="res://Scene/Entities/Treasure/treasure.tscn" id="7_5c74l"]
+[ext_resource type="PackedScene" uid="uid://doqcnkcdik1bj" path="res://Scene/Entities/DungeonDoor/dungeon_door.tscn" id="8_scehs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f5wry"]
 texture = ExtResource("2_jaqm7")
@@ -78,7 +79,7 @@ layer_0/tile_data = PackedInt32Array(0, 262144, 1, 65536, 262144, 1, 131072, 262
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMap"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMap/StaticBody2D"]
-polygon = PackedVector2Array(32, 32, 32, 0, 1008, 0, 1008, 560, 0, 560, 0, 0, 32, 0, 32, 528, 976, 528, 976, 32)
+polygon = PackedVector2Array(32, 32, 32, 0, 1008, 0, 1008, 560, 0, 560, 0, 0, 32, 0, 32, 528, 976, 528, 976, 32, 235, 32, 235, 11, 219, 11, 219.107, 32)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="TileMap"]
 
@@ -108,5 +109,8 @@ position = Vector2(182, 69)
 
 [node name="Treasure" parent="." instance=ExtResource("7_5c74l")]
 position = Vector2(134, 67)
+
+[node name="DungeonDoor" parent="." instance=ExtResource("8_scehs")]
+position = Vector2(227, 16)
 
 [connection signal="mob_spawning_done" from="MobSpawner" to="." method="_on_mob_spawner_mob_spawning_done"]

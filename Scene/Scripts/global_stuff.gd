@@ -14,6 +14,8 @@ signal death(name: String)
 
 signal equip(equiper: String, weapon: Weapon)
 
+signal treasure_has_been_acquired()
+
 func add_entity(entity_name: String, entity: Node):
 	entities[entity_name] = entity
 	print("Adding ", entity_name, " to entities")
@@ -24,3 +26,4 @@ func delete_entity(entity_name: String):
 
 func toggle_treasure_acquired():
 	treasure_acquired = true
+	treasure_has_been_acquired.emit()
