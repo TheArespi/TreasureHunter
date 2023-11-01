@@ -1,10 +1,11 @@
 extends Node2D
 
 @export var max_health: int = 100
+@export var entity_information: Node
 
 var current_health: int
 
-signal health_reached_zero
+signal health_reached_zero(entity_name: String)
 
 func _ready(): 
 	$HealthBar.max_value = max_health
@@ -21,4 +22,4 @@ func damage(amount: int):
 	set_current_health(current_health - amount)
 	
 	if current_health == 0:
-		health_reached_zero.emit()
+		health_reached_zero.emit(entity_information.entity_name)

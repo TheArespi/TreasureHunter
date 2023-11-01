@@ -63,8 +63,9 @@ sprite_2d = NodePath("../Sprite2D")
 health = NodePath("../../Health")
 combat_information = NodePath("../../CombatInformation")
 
-[node name="Health" parent="." instance=ExtResource("8_1ttyu")]
+[node name="Health" parent="." node_paths=PackedStringArray("entity_information") instance=ExtResource("8_1ttyu")]
 position = Vector2(0, -4)
+entity_information = NodePath("../EntityInformation")
 
 [node name="Mortality" parent="." node_paths=PackedStringArray("health", "entity_info") instance=ExtResource("9_cqnjf")]
 health = NodePath("../Health")
@@ -74,3 +75,4 @@ entity_info = NodePath("../EntityInformation")
 weapon = ExtResource("11_tdci3")
 
 [connection signal="stopped_moving" from="GridBasedMovement" to="." method="_on_grid_based_movement_stopped_moving"]
+[connection signal="health_reached_zero" from="Health" to="Mortality" method="_on_health_health_reached_zero"]

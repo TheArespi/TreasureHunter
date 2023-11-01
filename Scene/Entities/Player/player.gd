@@ -35,3 +35,7 @@ func _on_grid_based_movement_stopped_moving():
 func equip(_equipper: String, weapon: Weapon):
 	$CombatInformation.weapon = weapon
 	print("Player found the treasure")
+
+func _on_health_health_reached_zero(entity_name: String):
+	if entity_name == $EntityInformation.entity_name:
+		GlobalStuff.toggle_game_over(false)

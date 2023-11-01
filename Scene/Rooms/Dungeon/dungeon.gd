@@ -13,7 +13,7 @@ func _ready():
 	next_turn()
 	
 func _process(_delta):
-	if current_turn_done:
+	if current_turn_done and not GlobalStuff.game_finished:
 		next_turn()
 	
 func next_turn():
@@ -24,15 +24,18 @@ func next_turn():
 	GlobalStuff.start_turn.emit(current_turn)
 	print("Current Turn: ", current_turn)
 	
-func current_turn_stop(name: String):
+func current_turn_stop(_name: String):
 	current_turn_done = true
 
 func _on_mob_spawner_mob_spawning_done():
 	for mob in $MobSpawner.get_children():
 		turn_queue.append(mob.get_node("EntityInformation").entity_name)
 		
-func death(name: String):
-	turn_queue.erase(name)
+func death(entity_name: String):
+	turn_queue.erase(entity_name)
 	
-	if current_turn == name:
+	if current_turn == entity_name:
 		next_turn()
+
+func game_over(_success: bool):
+	pass
